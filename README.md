@@ -15,11 +15,13 @@ Cai Jun
 Compare the prediction results with the results reported in the paper.
 
 （1）参考https://github.com/xptree/DeepInf 代码利用作业微博数据集对文章进行了复现。参数选择基本参考论文。结果表明，GAT的性能明显优于GCN，但训练时间几乎是GCN双倍。复现结果与文中结果对比如下：
-  Model		             AUC	Prec	 Rec	 F1
+
+  Model		             AUC   Prec	   Rec   F1
 DeepInf-GCN	文章结果	76.85	42.44	71.30	53.21
 	          复现结果	74.48	40.95	72.79	52.96
 DeepInf-GAT	文章结果	82.72	48.53	76.09	59.27
 	          复现结果	82.33	46.89	78.02	58.11
+
 文章中有个很有趣的点，在和baseline（LR、SVM、PSCN）比较时，DeepInf-GCN在所有方法中性能最差，作者将其归因于homophily assumption of GCN，即相似的顶点比不相似的顶点更容易相互连接。在这样的假设下，对于一个特定的顶点，GCN通过取其邻域表示的未加权平均值来计算其隐藏表示。然而，在我们的应用中，同源性假设可能不成立。另一方面活跃邻居比不活跃邻居更重要，GAT使用图注意力来区别对待邻居，这也解释了其性能更优的原因。
 故一般情况下性能优先下选用GAT。但若考虑时间经济性，可在性能条件满足、同源性假设成立前提下，可使用GCN节约时间成本。
 （2）去除实例规范化层再一次训练，对比体会规范化的效果，可得到文中的结论。实例规范化层可显著地避免了过度拟合，使训练过程更加robust。
