@@ -12,7 +12,7 @@ from utils import load_w2v_feature
 import sklearn
 import itertools
 import logging
-import igraph
+import jgraph
 from sklearn import preprocessing
 
 logger = logging.getLogger(__name__)
