@@ -9,7 +9,7 @@ Cai Jun
 全文翻译整理在https://blog.csdn.net/weixin_42281282/article/details/107424423
 
 
-图：DeepInf相关领域
+
 Implement DeepInf-GCN and DeepInf-GAT to predict users’ retweeting behaviors on Weibo
 Compare the prediction results with the results reported in the paper.
 
