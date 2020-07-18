@@ -1,7 +1,7 @@
 # meaching-learning
-Homework 6
-Cai Jun
-Read the paper (DeepInf: Social Influence Prediction with Deep Learning)
+
+
+Read the paper
 
 文章提出了一个基于深度学习的框架DeepInf，将影响动态和网络结构都表示为一个潜在空间。将网络嵌入、图卷积和图注意力机制构建到一个统一的框架中，为了预测一个用户v的动作状态，首先用RWR对她的本地邻居进行抽样。在获得局部网络之后，利用图卷积和注意力技术来学习潜在的预测信号。文章的实验结果表明，除了预先训练好的网络嵌入，不考虑任何手工制作的特性，使DeepInf成为一个“纯”的端到端学习框架。仍然可以获得相当的性能。
 
