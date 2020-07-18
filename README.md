@@ -13,7 +13,7 @@ Cai Jun
 Implement DeepInf-GCN and DeepInf-GAT to predict users’ retweeting behaviors on Weibo
 Compare the prediction results with the results reported in the paper.
 
-（1）参考https://github.com/xptree/DeepInf代码利用作业微博数据集对文章进行了复现。参数选择基本参考论文。结果表明，GAT的性能明显优于GCN，但训练时间几乎是GCN双倍。复现结果与文中结果对比如下：
+（1）参考https://github.com/xptree/DeepInf 代码利用作业微博数据集对文章进行了复现。参数选择基本参考论文。结果表明，GAT的性能明显优于GCN，但训练时间几乎是GCN双倍。复现结果与文中结果对比如下：
   Model		             AUC	Prec	 Rec	 F1
 DeepInf-GCN	文章结果	76.85	42.44	71.30	53.21
 	          复现结果	74.48	40.95	72.79	52.96
