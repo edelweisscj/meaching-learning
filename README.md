@@ -1,5 +1,7 @@
 # meaching-learning
 
+无图表版本
+
 Cai Jun
 
 Read the paper
