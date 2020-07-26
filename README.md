@@ -14,7 +14,7 @@
 
 •引入了GANs作为解决半监督环境下图的分类问题的工具。GraphSGAN在图的低密度区域生成假样本，并利用聚类特性帮助分类。
 
-•为GraphSGAN设计了一个新颖的鉴别器之间的竞争博弈，深入分析了训练过程中的动力学、平衡和工作原理。此外，我们还对传统算法进行了改进。理论证明和实验验证都表明了该方法的有效性。
+•为GraphSGAN设计了一个新颖的鉴别器之间的竞争博弈，深入分析了训练过程中的dynamics、平衡和工作原理。此外，我们还对传统算法进行了改进。理论证明和实验验证都表明了该方法的有效性。
 
 •在多个不同比例的数据集上评估我们的模型。GraphSGAN的性能明显优于以前的工作，并且展示了出色的可伸缩性。
 
@@ -145,7 +145,7 @@ loss_pt最初设计用于在GAN中产生不同的样本。它是批处理中向�
 
 
 
-## 5. Try to improve the performance by using other techniques (e.g. some advanced network embedding methods).
+## 5. Try to improve the performance by using other techniques.
 
 
 要进一步提升模型性能，有以下几种思路，可以综合采用。
