@@ -24,7 +24,7 @@
 
 基于GAN的模型不能直接应用于图形数据。为此，GraphSGAN首先使用网络嵌入方法（例如，DeaveWalk等）来学习每个节点的潜在分布表示qi，然后将潜在分布qi与原始特征向量wi连接，即xi＝（wi，qi）。最后，xi作为我们的方法的输入。GraphSGAN中的分类器D和生成器G都是多层感知器。更具体地说，发生器以高斯噪声Z作为输入，并输出具有与席I形状相似的伪样本。在生成器中，使用批处理规范化。生成器的输出层受权重规范化技巧的约束，该技巧具有可训练的weight scale。GANs中的鉴别器由分类器代替，在输入后加入随机层（加性高斯噪声）和全连通层以达到平滑的目的。在预测模式下去除噪声。全连通层中的参数通过正则化的权重归一化来约束。分类器中最后一个隐藏层的输出是通过非线性变换从输入x中提取的特征，这对于训练生成器时的特征匹配至关重要。
 
-归一化是降低边缘节点影响的核心。文中方法为生成假节点，将它们链接到最近的实节点，然后求解图的拉普拉斯正则化。假标签不允许分配给未标记的节点，损失计算只考虑真实节点之间的边。
+归一化是降低边缘节点影响的核心。文中采用生成假节点的方法，将它们链接到最近的实节点，然后求解图的拉普拉斯正则化。假标签不允许分配给未标记的节点，损失计算只考虑真实节点之间的边。
 
 ## 2. Implement GraphSGAN on Cora dataset.
 ## 3. Compare your prediction results with the results reported in the paper.
@@ -152,7 +152,7 @@ loss_pt最初设计用于在GAN中产生不同的样本。它是批处理中向�
 
 （1）第一种思路对模型进行提升。
 
-可以在参数选择上进一步细化，分析应条件为GraphSGAN设计更好的损失函数，研究更理想的平衡点；
+可以在参数选择上进一步细化，分析应满足条件为GraphSGAN设计更好的损失函数，研究更理想的平衡点；
 
 还可以用ensemble learning的思想，将文中作为baseline的方法（regularization-based methods including LP , ICA  and ManiReg / embedding-based methods including DeepWalk, SemiEmb and Planetoid / convolution-based methods including Chebyshev , GCN and GAT ）与GraphSGAN结合，对神经网络进行结构改造，权衡各种因素的影响。
 
