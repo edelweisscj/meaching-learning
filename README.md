@@ -16,9 +16,9 @@ Overview:提出了图的半监督学习的一种新方法GraphSGAN。在GraphSGA
 
 •在多个不同比例的数据集上评估我们的模型。GraphSGAN的性能明显优于以前的工作，并且展示了出色的可伸缩性。
 
-    使用GAN来估计密度子图，然后在密度空白区域生成样本。然后要求分类器先对假样本进行识别，然后再将其分类。这样，将假样本与真样本区分开来，会导致学习到的分类函数在密度间隙附近具有更高的曲率，从而削弱了穿过密度间隙传播的效果。同时，在每个子图内部，由于有监督的降损技术和一般的平滑技术，例如随机层，对正确标签的置信度将逐渐提高。
+使用GAN来估计密度子图，然后在密度空白区域生成样本。然后要求分类器先对假样本进行识别，然后再将其分类。这样，将假样本与真样本区分开来，会导致学习到的分类函数在密度间隙附近具有更高的曲率，从而削弱了穿过密度间隙传播的效果。同时，在每个子图内部，由于有监督的降损技术和一般的平滑技术，例如随机层，对正确标签的置信度将逐渐提高。
 
-    基于GAN的模型不能直接应用于图形数据。为此，GraphSGAN首先使用网络嵌入方法（例如，DeaveWalk等）来学习每个节点的潜在分布表示qi，然后将潜在分布qi与原始特征向量wi连接，即xi＝（wi，qi）。最后，xi作为我们的方法的输入。GraphSGAN中的分类器D和生成器G都是多层感知器。更具体地说，发生器以高斯噪声Z作为输入，并输出具有与席I形状相似的伪样本。在生成器中，使用批处理规范化。生成器的输出层受权重规范化技巧的约束，该技巧具有可训练的weight scale。GANs中的鉴别器由分类器代替，在输入后加入随机层（加性高斯噪声）和全连通层以达到平滑的目的。在预测模式下去除噪声。全连通层中的参数通过正则化的权重归一化来约束。分类器中最后一个隐藏层的输出是通过非线性变换从输入x中提取的特征，这对于训练生成器时的特征匹配至关重要。
+基于GAN的模型不能直接应用于图形数据。为此，GraphSGAN首先使用网络嵌入方法（例如，DeaveWalk等）来学习每个节点的潜在分布表示qi，然后将潜在分布qi与原始特征向量wi连接，即xi＝（wi，qi）。最后，xi作为我们的方法的输入。GraphSGAN中的分类器D和生成器G都是多层感知器。更具体地说，发生器以高斯噪声Z作为输入，并输出具有与席I形状相似的伪样本。在生成器中，使用批处理规范化。生成器的输出层受权重规范化技巧的约束，该技巧具有可训练的weight scale。GANs中的鉴别器由分类器代替，在输入后加入随机层（加性高斯噪声）和全连通层以达到平滑的目的。在预测模式下去除噪声。全连通层中的参数通过正则化的权重归一化来约束。分类器中最后一个隐藏层的输出是通过非线性变换从输入x中提取的特征，这对于训练生成器时的特征匹配至关重要。
 
 ## 2. Implement GraphSGAN on Cora dataset.
 ## 3. Compare your prediction results with the results reported in the paper.
@@ -113,7 +113,7 @@ GAN是一种通过对抗过程估计生成模型的新框架，其中生成模�
 在一个普通的博弈中，G和D有各自的损失函数，并试图使其最小化。他们的损失是相互依存的。文中表示为损耗函数L_G（G，D）和L_D（G，D）。效用函数V_G（G，D）和V_D（G，D）是负损失函数。GANs定义了一个零和博弈，其中L_G（G，D）=−L_D（G，D）。在这种情况下，唯一的纳什均衡可以通过极大极小策略来达到。
 文中提出的GraphSGAN修改了L_D（G，D）和L_G（G，D）来设计一个新的博弈，在这个博弈中，G将在平衡点的密度间隙中生成样本。基于著名的“维度诅咒”，我们希望中心区域成为一个密度间隙而不是一个团簇。
 
-定义 L_D = loss_supervised + loss_unsupervised + loss_ent + loss_pt
+定义 L_D = loss_supervised + lamda0 * loss_unsupervised + lamda1 * loss_ent + loss_pt
 
 L_G = loss_fm + lamda2 * loss_pt
 
@@ -121,15 +121,18 @@ L_G = loss_fm + lamda2 * loss_pt
 
 （1） 不同类的节点应该映射到不同的集群中。（2） 标记和未标记的节点都不应映射到中心区域，以使其成为一个密度间隙。（3） 每个未标记的节点都应该映射到一个表示特定标签的集群中。（4） 不同的集群应该足够远。
 
- loss_supervised is defined as the cross entropy between predicted distribution over M classes and one-hot representation for real label.所以loss_supervised的作用是用来满足条件（1），减小loss_supervised使得不同类的节点尽可能映射到不同的集群中。
+ loss_supervised is defined as the cross entropy between predicted distribution over M classes and one-hot representation for real label.所以loss_supervised的作用是用来满足条件（1），减小loss_supervised可使不同类的节点尽可能映射到不同的集群中。
  
- loss_unsupervised 根据来定义。The classifier D incurs loss_unsupervised when real-or-fake misclassification happens.
-介于G在中心密度间隙产生假样本，条件（2）相当于original GAN 中D的目的。
+ loss_unsupervised 根据最小-最大博弈的loss (value) function来定义。The classifier D incurs loss_unsupervised when real-or-fake misclassification happens.
+介于G在中心密度间隙产生假样本，条件（2）相当于original GAN 中D的目的，所以 loss_unsupervised用来满足条件（2）。
 
+loss_ent是M个标签上的分布熵（熵：概率分布不确定性的度量），是一个熵正则化项，用来满足条件（3），减少熵可以鼓励分类器为每个节点确定一个明确的标签。
 
-loss_supervised 
-loss_unsupervised 
-loss_gen
+loss_pt最初设计用于在GAN中产生不同的样本。它是批处理中向量之间的平均余弦距离，使最后表示层的表示尽可能远离其他层。条件（4）扩大了密度差距，有助于分类。因此，减小loss_pt可以满足条件（4），鼓励集群远离其他集群。
+
+假设D满足上述四个条件，文中给了两个条件可以保证G在h（n）（x）中达到预期平衡：（1）G生成映射到中心区域的样本。（2） 生成的样本不应在唯一的中心点过度拟合。
+
+产生性损失loss_gen用来满足这两个条件。
 
 ## 5. Try to improve the performance by using other techniques (e.g. some advanced network embedding methods).
 
