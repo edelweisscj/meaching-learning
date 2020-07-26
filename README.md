@@ -40,11 +40,13 @@ Cognitive Graph for Multi-Hop Reading Comprehension at Scale
 {'em': 0.37555705604321404, 'f1': 0.49404898995339086, 'prec': 0.522077693107403, 'recall': 0.49920254582019247, 'sp_em': 0.23119513841998648, 'sp_f1': 0.5852652666167758, 'sp_prec': 0.642654924975991, 'sp_recall': 0.5968465644191497, 'joint_em': 0.12180958811613775, 'joint_f1': 0.3528686167056055, 'joint_prec': 0.4028774305383, 'joint_recall': 0.3646712724258193}
 
 ## Improve CogQA.
-
-System1 优化网络结构
+利用tune库超参数调优，
+System1和System2进一步融合，模拟大脑思维的过程，增加系统间的通道数。
+System1 进一步优化网络结构
 System2
-借鉴MDO（多学科优化）思想
-AutoML
+借鉴MDO（多学科优化）思想、
+AutoML、
+元学习，进一步完善可解释性和推理逻辑。
 
 ## A little bit more...
 
@@ -54,5 +56,5 @@ AutoML
 
 redis和 tmux 好玩好用，新技能get!
 
-学科交叉，从Systerm1到System2，AI从感知走向认知，追求可解释性，这是AI的未来发展方向，意味着“感性”到“理性”的飞跃。虽然目前我们依旧很懵懂，很多问题待解决，但未来可期！
+学科交叉，从Systerm1到System2，AI从感知走向认知，追求可解释性，意味着“感性”到“理性”的飞跃。虽然目前我们依旧很懵懂，很多问题待解决，我们似乎窥到了一点点AI future的模样，未来可期！
 
