@@ -1,5 +1,8 @@
-## Read the CogQA paper 
-https://arxiv.org/abs/1905.05460 
+## Participate in MineRL 
+https://www.aicrowd.com/challenges/neurips-2020-minerl-competition 
+
+The MineRL 2020 Competition aims to foster the development of algorithms which can efficiently leverage human demonstrations to drastically reduce the number of samples needed to solve complex, hierarchical, and sparse environments. 
+
 ## Read the influential HotpotQA dataset 
 https://arxiv.org/pdf/1809.09600.pdf
 
