@@ -3,12 +3,13 @@ https://www.aicrowd.com/challenges/neurips-2020-minerl-competition
 
 The MineRL 2020 Competition aims to foster the development of algorithms which can efficiently leverage human demonstrations to drastically reduce the number of samples needed to solve complex, hierarchical, and sparse environments. 
 
-## Read the influential HotpotQA dataset 
-https://arxiv.org/pdf/1809.09600.pdf
+Participants will submit agents (round 1) and the code to train them from scratch (round 2) to AICrowd. Agents must train in under 8,000,000 samples from the environment on at most 1 P100 GPU for at most 4 days of training. The submissions must train a machine learning model without relying on human domain knowledge (no hardcoding, no manual specification of meta-actions e.g. move forward then dig down, etc). Participants can use the provided MineRL-v0 dataset of human demonstrations, but no external datasets.
 
-Cognitive Graph for Multi-Hop Reading Comprehension at Scale
+## Environment setting & baselines Implementing
 
-文章翻译整理在https://blog.csdn.net/weixin_42281282/article/details/107453137
+参考https://github.com/minerllabs/minerl 和 https://github.com/minerllabs/competition_submission_template 配置环境
+
+
 
 #### Overview
 
@@ -36,11 +37,6 @@ Cognitive Graph for Multi-Hop Reading Comprehension at Scale
 
 参考 https://github.com/THUDM/CogQA https://github.com/qibinc/CogQA 和https://github.com/dogydev/CogQA 复现论文
 
-运行结果
-{'em': 0.31427413909520594, 'f1': 0.452285260928425, 'prec': 0.50057944546263254, 'recall': 0.49101315200975601, 'sp_em': 0.227022282241728562, 'sp_f1': 0.5664633505889512, 'sp_prec': 0.6250258834121089, 'sp_recall': 0.5339292948779767, 'joint_em': 0.102835921674544227, 'joint_f1': 0.32569627417348081, 'joint_prec': 0.37554205116662915, 'joint_recall': 0.337765240089584142}
-
-文章结果
-{'em': 0.37555705604321404, 'f1': 0.49404898995339086, 'prec': 0.522077693107403, 'recall': 0.49920254582019247, 'sp_em': 0.23119513841998648, 'sp_f1': 0.5852652666167758, 'sp_prec': 0.642654924975991, 'sp_recall': 0.5968465644191497, 'joint_em': 0.12180958811613775, 'joint_f1': 0.3528686167056055, 'joint_prec': 0.4028774305383, 'joint_recall': 0.3646712724258193}
 
 ## Improve CogQA.
 利用tune库超参数调优，
