@@ -25,55 +25,43 @@ DQfD
 
 因aws服务器总是无法跑通，故在本地Ubuntu下安装docker，尝试实现不需要trajectory dataset的算法(DDDQN与Rainbow)
 
-#### Overview
+https://github.com/minerllabs/baselines/tree/master/general/chainerrl 给出的baseline experimental results of DDDQN/Rainbow/PPO/BC/GAIL/DQfD
+      use trajectory dataset?	Treechop	Navigate	NavigateDense
+(paper) DDDQN	No	3.73 +- 0.61	0.00 +- 0.00	55.59 +- 11.38
+(paper) A2C	No	2.61 +- 0.50	0.00 +- 0.00	-0.97 +- 3.32
+(paper) BC	Yes	0.75 +- 0.39	4.23 +- 4.15	5.57 +- 6.00
+(paper) PreDQN	Yes	4.16 +- 0.82	6.00 +- 4.65	94.96 +- 13.42
+(ours) DDDQN	No	5.28 +- 2.87	4.0 +- 19.60	59.13 +- 52.43
+(ours) Rainbow	No	62.44 +- 2.74	13.0 +- 33.63	66.89 +- 41.24
+(ours) PPO	No	56.31 +- 8.31	8.0 +- 27.13	87.83 +- 59.46
+(ours) BC	Yes	9.27 +- 5.21	46.00 +- 50.1	69.54 +- 57.02
+(ours) GAIL	Yes	16.34 +- 6.85	32.00 +- 46.88	59.32 +- 30.60
+(ours) DQfD	Yes	62.37 +- 2.16	6.00 +- 23.75	not evaluated
+(paper) Human	-	64.00 +- 0.00	100.00 +- 0.00	164.00 +- 0.00
 
-文章提出了一种新的面向web文档多跳问答的CogQA框架。该框架以认知科学中的双过程理论为基础，通过协调隐式提取模块（系统1）和显式推理模块（系统2）（系统1从段落中提取与问题相关的实体和答案，并对其语义信息进行编码。提取的实体被组织成一个认知图，类似于工作记忆。然后系统2在图上执行推理过程，并收集线索以指导系统1更好地提取下一跳实体），在迭代过程中逐步构建认知图。在给出准确答案的同时，框架还提供了可解释的推理路径。
-#### Contribution
+在实现过程中，利用了https://hub.docker.com/r/chenqibin422/minerl docker环境。由于硬件条件等各方面的约束，并没有得到好的训练效果，但能观察到reward不断提高，动作的奖励值是由开发者决定的，奖励值的设置好坏对学习效果有很大影响。
 
-• 文中提出了一种新的基于人类认知的多跳阅读理解问答框架。
+## For Competition.
+竞赛要求The submissions must train a machine learning model without relying on human domain knowledge (no hardcoding, no manual specification of meta-actions e.g. move forward then dig down, etc). Participants can use the provided MineRL-v0 dataset of human demonstrations, but no external datasets.确实难度比较大，希望可以寻求队友共同参赛。
 
-• 文章表明，我们框架中的认知图结构提供了有序和整体的可解释性，适合于关系推理。
-
-• 文章基于BERT和GNN的实现在所有指标上大大超过了以前的工作和其他竞争对手。
-
-#### interest
-
-• 
-
-• 
-
-• 
-
-## Reproduce CogQA results.
-
-
-
-
-## Improve CogQA.
-利用tune库超参数调优，
-System1和System2进一步融合，模拟大脑思维的过程，增加系统间的通道数，优化系统之间的交互。
-
-System1 进一步优化网络结构，结合注意力和递归机制的未来架构提高容量。
-
-System2 借鉴MDO（多学科优化）思想、
-AutoML、
-元学习等，进一步完善可解释性和推理逻辑，利用神经逻辑技术来提高可靠性。
+最近有几篇有意思的论文值得借鉴研究
+1. What Can Learned Intrinsic Rewards Capture?
 强化学习（Reinforcement Learning，RL）智能体的目标是奖励最大化。在此论文中，作者们认为奖励函数自身可以成为学习知识的好地方。为了进一步研究，他们提出了一个可伸缩的元梯度（meta-gradient）框架，跨多个生命周期学习有用的内在奖励函数，从而表明，学习并捕获有关长期探索和开发的知识到奖励函数是可行的。
+参考链接：https://analyticsindiamag.com/papers-icml-2020-research-conference/
 
-参考链接：
-https://analyticsindiamag.com/papers-icml-2020-research-conference/
-
+2. Discovering Reinforcement Learning Algorithms
+Alphabet 旗下的 DeepMind ，正在寻找新的方法来进一步提高算法自主学习的自动化程度：让算法自己处理顶级计算机科学家可能都要花好几年时间才能完成的复杂编程任务。
+在预印本网站 arXiv 上发表的一篇最新论文中，DeepMind 团队描述了一种新的深度强化学习算法，该算法能够发现其自身的值函数（value function）
 ## A little bit more...
 
-• 
+• 简单来讲，强化学习的主要目的是研究并解决智能体或多智能体贯序决策的问题，在理论与我专业领域的自动控制有共通之处，很多人说强化学习是人工智能的未来，因为它更接近生物自然学习的过程。然而机器是否真正理解交互过程的真正含义？尽管如今深度强化学习使得效果大幅提升，在视频游戏、棋类游戏、资源调配、自动调参等领域大显神通，然而复杂环境的建立难度，奖励值的设置人为影响，值函数近似误差带来的过估计问题等……这些仍然使得当前的强化学习被局限在很小的应用范围内，无法解决复杂环境中的实际决策问题。强化学习是否还需要原理性的突破才能面对未来各项应用挑战？未来是否进一步与知识图谱等结合，【知识驱动+环境驱动+数据驱动】，融合领域所长，促进AI进一步发展？
 
-• 此外尝试改进程序with SAVING AND LOADING MODELS，以求克服12小时top的服务器运行时间。
+• 想做好AI，硬件和软件算法同样重要，迫切想有个好用的服务器，可以无障碍跑程序。下一步就是花经费去，争取近期把自己的服务器建起来。
 
-• redis和 tmux 好玩好用，新技能get!
+• 努力提升自身各方面能力，包括代码能力，硬件配置调试能力，钻研算法，力争在理论上有所突破，出高水平论文。
 
-• 文中提到：框架可以推广到其他认知任务，例如会话人工智能和顺序推荐。我认为还可以适用于很多其他的任务。比如意图驱动，与可穿戴设备融合，替代人的认知和推理————数据由我、随心而动。
+• 从课程中get到了不少新知识和新技能，非常感谢唐老师和各位助教老师以及课程建设人员/组织者的辛苦付出！！学无止境！！人工智能是一个多学科交叉的闪光点，潜力无限！我会结合本专业所长在这个跨学科领域继续耕耘下去，并把收获带给自己的学生，期望AI的未来有我们奋斗的痕迹~~
 
-• 学科交叉，从Systerm1到System2，AI从感知走向认知，追求可解释性，意味着“感性”到“理性”的飞跃。虽然目前我们依旧很懵懂，很多问题待解决，我们似乎窥到了一点点AI future的模样，未来可期！
 
 ## References
 [1] NeurIPS 2019 Competition: The MineRL Competition on Sample Efficient Reinforcement Learning using Human Priors
@@ -84,5 +72,7 @@ https://analyticsindiamag.com/papers-icml-2020-research-conference/
 [6] Reinforcement Learning: An Introduction
 [7] A Distributional Perspective on Reinforcement Learning
 [8] Rainbow: Combining Improvements in Deep Reinforcement Learning
-[9] The MineRL Competition on Sample Efficient Reinforcement Learning using Human Priors
+[9] 白话强化学习与Pytorch
+[10] What Can Learned Intrinsic Rewards Capture?
+[11] Discovering Reinforcement Learning Algorithms
 
