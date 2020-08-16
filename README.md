@@ -23,20 +23,32 @@ GAIL
 [baselines/dqfd.sh]
 DQfD
 
-因aws服务器总是无法跑通，故在本地Ubuntu下安装docker，尝试实现不需要trajectory dataset的算法(DDDQN与Rainbow)
+因aws服务器总是无法跑通，故在本地Ubuntu下安装docker，尝试实现两种不需要trajectory dataset的算法(DDDQN与Rainbow)
 
 https://github.com/minerllabs/baselines/tree/master/general/chainerrl 给出的baseline experimental results of DDDQN/Rainbow/PPO/BC/GAIL/DQfD
+
       use trajectory dataset?	Treechop	Navigate	NavigateDense
+      
 (paper) DDDQN	No	3.73 +- 0.61	0.00 +- 0.00	55.59 +- 11.38
+
 (paper) A2C	No	2.61 +- 0.50	0.00 +- 0.00	-0.97 +- 3.32
+
 (paper) BC	Yes	0.75 +- 0.39	4.23 +- 4.15	5.57 +- 6.00
+
 (paper) PreDQN	Yes	4.16 +- 0.82	6.00 +- 4.65	94.96 +- 13.42
+
 (ours) DDDQN	No	5.28 +- 2.87	4.0 +- 19.60	59.13 +- 52.43
+
 (ours) Rainbow	No	62.44 +- 2.74	13.0 +- 33.63	66.89 +- 41.24
+
 (ours) PPO	No	56.31 +- 8.31	8.0 +- 27.13	87.83 +- 59.46
+
 (ours) BC	Yes	9.27 +- 5.21	46.00 +- 50.1	69.54 +- 57.02
+
 (ours) GAIL	Yes	16.34 +- 6.85	32.00 +- 46.88	59.32 +- 30.60
+
 (ours) DQfD	Yes	62.37 +- 2.16	6.00 +- 23.75	not evaluated
+
 (paper) Human	-	64.00 +- 0.00	100.00 +- 0.00	164.00 +- 0.00
 
 在实现过程中，利用了https://hub.docker.com/r/chenqibin422/minerl docker环境。由于硬件条件等各方面的约束，并没有得到好的训练效果，但能观察到reward不断提高，动作的奖励值是由开发者决定的，奖励值的设置好坏对学习效果有很大影响。
@@ -45,11 +57,14 @@ https://github.com/minerllabs/baselines/tree/master/general/chainerrl 给出的b
 竞赛要求The submissions must train a machine learning model without relying on human domain knowledge (no hardcoding, no manual specification of meta-actions e.g. move forward then dig down, etc). Participants can use the provided MineRL-v0 dataset of human demonstrations, but no external datasets.确实难度比较大，希望可以寻求队友共同参赛。
 
 最近有几篇有意思的论文值得借鉴研究
+
 1. What Can Learned Intrinsic Rewards Capture?
+
 强化学习（Reinforcement Learning，RL）智能体的目标是奖励最大化。在此论文中，作者们认为奖励函数自身可以成为学习知识的好地方。为了进一步研究，他们提出了一个可伸缩的元梯度（meta-gradient）框架，跨多个生命周期学习有用的内在奖励函数，从而表明，学习并捕获有关长期探索和开发的知识到奖励函数是可行的。
 参考链接：https://analyticsindiamag.com/papers-icml-2020-research-conference/
 
 2. Discovering Reinforcement Learning Algorithms
+
 Alphabet 旗下的 DeepMind ，正在寻找新的方法来进一步提高算法自主学习的自动化程度：让算法自己处理顶级计算机科学家可能都要花好几年时间才能完成的复杂编程任务。
 在预印本网站 arXiv 上发表的一篇最新论文中，DeepMind 团队描述了一种新的深度强化学习算法，该算法能够发现其自身的值函数（value function）
 ## A little bit more...
