@@ -59,6 +59,14 @@ https://github.com/minerllabs/baselines/tree/master/general/chainerrl 给出的b
 
 在实现过程中，利用了https://hub.docker.com/r/chenqibin422/minerl docker环境。由于硬件条件等各方面的约束，并没有得到好的训练效果，但能观察到reward不断提高，动作的奖励值是由开发者决定的，奖励值的设置好坏对学习效果有很大影响。
 
+#### Rainbow
+可以理解为大融合， DQN 的很多改进都用上了，之前 Dueling DQN 其实已经把 Double DQN 和 Prioritized replay 已经用上了，除此之外，Q-learning 还有一个改进是 Multi-step，后来又有人提出了 Distributional RL 和 Noisy net。Rainbow: Combining Improvements in Deep Reinforcement Learning这篇论文的思想就是把这些改进全结合到一起，做一个全能的网络。
+#### PPO
+在监督学习中，实现损失函数、在上面做梯度下降都很容易，而且基本上不费什么功夫调节超参数就肯定能够得到很好的结果。但是在强化学习中想要获得好结果就没有这么简单了，算法中有许多变化的部分导致难以 debug，而且需要花很大的精力在调试上才能得到好结果。PPO 则在实现的难易程度、采样复杂度、调试所需精力之间取得了新的平衡，它在每一步迭代中都会尝试计算新的策略，这样可以让损失函数最小化，同时还能保证与上一步迭代的策略间的偏差相对较小。
+
+PPO 算法很好地权衡了实现简单性、样本复杂度和调参难度，它尝试在每一迭代步计算一个更新以最小化成本函数，在计算梯度时还需要确保与先前策略有相对较小的偏差。
+
+
 ## For Competition
 竞赛要求The submissions must train a machine learning model without relying on human domain knowledge (no hardcoding, no manual specification of meta-actions e.g. move forward then dig down, etc). Participants can use the provided MineRL-v0 dataset of human demonstrations, but no external datasets.确实难度比较大，希望可以寻求队友共同参赛。
 
@@ -104,16 +112,28 @@ LPG让算法不需要所负责训练的环境提供输入就有一定的效果�
 
 
 ## References
+
 [1] NeurIPS 2019 Competition: The MineRL Competition on Sample Efficient Reinforcement Learning using Human Priors
+
 [2] Playing Atari with Deep Reinforcement Learning
+
 [3] Deep Reinforcement Learning with Double Q-learning
+
 [4] Prioritized Experience Replay
+
 [5] Dueling Network Architectures for Deep Reinforcement Learning
+
 [6] Reinforcement Learning: An Introduction
+
 [7] A Distributional Perspective on Reinforcement Learning
+
 [8] Rainbow: Combining Improvements in Deep Reinforcement Learning
+
 [9] 白话强化学习与Pytorch
+
 [10] What Can Learned Intrinsic Rewards Capture?
+
 [11] Discovering Reinforcement Learning Algorithms
+
 [12] https://www.linkresearcher.com/theses/4d799c11-6628-4022-972a-0a157c8bd0fd
 
