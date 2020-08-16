@@ -1,4 +1,4 @@
-## Participate in MineRL 
+## MineRL 
 https://www.aicrowd.com/challenges/neurips-2020-minerl-competition 
 
 The MineRL 2020 Competition aims to foster the development of algorithms which can efficiently leverage human demonstrations to drastically reduce the number of samples needed to solve complex, hierarchical, and sparse environments. 
@@ -59,7 +59,7 @@ https://github.com/minerllabs/baselines/tree/master/general/chainerrl 给出的b
 
 在实现过程中，利用了https://hub.docker.com/r/chenqibin422/minerl docker环境。由于硬件条件等各方面的约束，并没有得到好的训练效果，但能观察到reward不断提高，动作的奖励值是由开发者决定的，奖励值的设置好坏对学习效果有很大影响。
 
-## For Competition.
+## For Competition
 竞赛要求The submissions must train a machine learning model without relying on human domain knowledge (no hardcoding, no manual specification of meta-actions e.g. move forward then dig down, etc). Participants can use the provided MineRL-v0 dataset of human demonstrations, but no external datasets.确实难度比较大，希望可以寻求队友共同参赛。
 
 最近有几篇有意思的论文值得借鉴研究
