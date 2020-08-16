@@ -9,7 +9,21 @@ Participants will submit agents (round 1) and the code to train them from scratc
 
 参考https://github.com/minerllabs/minerl 和 https://github.com/minerllabs/competition_submission_template 配置环境
 
+baselines中包含以下几种
+[baselines/dddqn.sh]
+Double Dueling DQN (DDDQN)
+[baselines/rainbow.sh]
+Rainbow
+[baselines/ppo.sh]
+PPO
+[baselines/behavoral_cloning.sh]
+Behavoral Cloning (BC)
+[baselines/gail.sh]
+GAIL
+[baselines/dqfd.sh]
+DQfD
 
+因aws服务器总是无法跑通，故在本地Ubuntu下安装docker，尝试实现不需要trajectory dataset的算法(DDDQN与Rainbow)
 
 #### Overview
 
@@ -24,18 +38,15 @@ Participants will submit agents (round 1) and the code to train them from scratc
 
 #### interest
 
-• 要跨越机器与人类阅读理解能力的鸿沟，还有三个主要挑战摆在面前：
-1）推理能力。单段问答模型倾向于在与问题匹配的句子中寻找答案，这并不涉及复杂的推理。因此，多跳QA成为下一个需要攻克的前沿。
-2） 可解释性。显式推理路径能够验证逻辑的严密性，对于QA系统的可靠性至关重要。HotpotQA要求模型提供支持句子，这意味着无序和句子级的解释能力，然而人类可以用一步一步的解决方案来解释答案，这表明了一种有序和整体性的解释能力。
-3） 可扩展性。对于任何实用的QA系统，可伸缩性是必不可少的。现有的基于机器理解的问答系统一般遵循DrQA中的检索抽取框架，通过预检索将源的范围缩小到几个段落。与人类在海量内存中通过知识进行推理的能力相比，该框架是单段问答和可伸缩信息检索之间的简单折衷。
+• 
 
-• 经验告诉我们：对这些挑战的解决方案的见解可以从人类的认知过程中获得。双过程理论（Evans，198420032008；Sloman，1996）表明，我们的大脑首先通过一个被称为系统1的隐式、无意识和直觉的过程，即系统1，在这个过程的基础上进行另一个显式、有意识和可控的推理过程，即系统2，来检索相关信息。系统1可以根据请求提供资源，而系统2可以通过在工作记忆中执行顺序思维来深入研究关系信息，后者速度较慢，但具有人类独特的理性。对于复杂的推理，这两个系统是协调的，以执行快速和缓慢的思考迭代。
+• 
 
-• 学科的交叉融合，基础科学的理论迁移与技术转化在此体现。
+• 
 
 ## Reproduce CogQA results.
 
-参考 https://github.com/THUDM/CogQA https://github.com/qibinc/CogQA 和https://github.com/dogydev/CogQA 复现论文
+
 
 
 ## Improve CogQA.
@@ -47,10 +58,14 @@ System1 进一步优化网络结构，结合注意力和递归机制的未来架
 System2 借鉴MDO（多学科优化）思想、
 AutoML、
 元学习等，进一步完善可解释性和推理逻辑，利用神经逻辑技术来提高可靠性。
+强化学习（Reinforcement Learning，RL）智能体的目标是奖励最大化。在此论文中，作者们认为奖励函数自身可以成为学习知识的好地方。为了进一步研究，他们提出了一个可伸缩的元梯度（meta-gradient）框架，跨多个生命周期学习有用的内在奖励函数，从而表明，学习并捕获有关长期探索和开发的知识到奖励函数是可行的。
+
+参考链接：
+https://analyticsindiamag.com/papers-icml-2020-research-conference/
 
 ## A little bit more...
 
-• 迄今为止花费最多时间在配置和训练上的project，GPU的弊端在于 memory 不够大，提供的服务器只有1个GPU，System2的batch-size直接降到1才勉强跑，冗长的训练时间带来低效的improve效率。尝试修改把部分模型放在本地CPU上跑（参考 https://github.com/THUDM/CogQA/issues/18 ），避免cuda out of memory 带来的训练漏数据的问题，提升训练模型回答问题性能。
+• 
 
 • 此外尝试改进程序with SAVING AND LOADING MODELS，以求克服12小时top的服务器运行时间。
 
@@ -59,4 +74,15 @@ AutoML、
 • 文中提到：框架可以推广到其他认知任务，例如会话人工智能和顺序推荐。我认为还可以适用于很多其他的任务。比如意图驱动，与可穿戴设备融合，替代人的认知和推理————数据由我、随心而动。
 
 • 学科交叉，从Systerm1到System2，AI从感知走向认知，追求可解释性，意味着“感性”到“理性”的飞跃。虽然目前我们依旧很懵懂，很多问题待解决，我们似乎窥到了一点点AI future的模样，未来可期！
+
+## References
+[1] NeurIPS 2019 Competition: The MineRL Competition on Sample Efficient Reinforcement Learning using Human Priors
+[2] Playing Atari with Deep Reinforcement Learning
+[3] Deep Reinforcement Learning with Double Q-learning
+[4] Prioritized Experience Replay
+[5] Dueling Network Architectures for Deep Reinforcement Learning
+[6] Reinforcement Learning: An Introduction
+[7] A Distributional Perspective on Reinforcement Learning
+[8] Rainbow: Combining Improvements in Deep Reinforcement Learning
+[9] The MineRL Competition on Sample Efficient Reinforcement Learning using Human Priors
 
