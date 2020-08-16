@@ -10,16 +10,22 @@ Participants will submit agents (round 1) and the code to train them from scratc
 参考https://github.com/minerllabs/minerl 和 https://github.com/minerllabs/competition_submission_template 配置环境
 
 baselines中包含以下几种
+
 [baselines/dddqn.sh]
 Double Dueling DQN (DDDQN)
+
 [baselines/rainbow.sh]
 Rainbow
+
 [baselines/ppo.sh]
 PPO
+
 [baselines/behavoral_cloning.sh]
 Behavoral Cloning (BC)
+
 [baselines/gail.sh]
 GAIL
+
 [baselines/dqfd.sh]
 DQfD
 
@@ -27,29 +33,29 @@ DQfD
 
 https://github.com/minerllabs/baselines/tree/master/general/chainerrl 给出的baseline experimental results of DDDQN/Rainbow/PPO/BC/GAIL/DQfD
 
-      use trajectory dataset?	Treechop	Navigate	NavigateDense
+             use trajectory dataset?	Treechop	Navigate	NavigateDense
       
-(paper) DDDQN	No	3.73 +- 0.61	0.00 +- 0.00	55.59 +- 11.38
+     (paper) DDDQN	No	      3.73 +- 0.61	0.00 +- 0.00	55.59 +- 11.38
 
-(paper) A2C	No	2.61 +- 0.50	0.00 +- 0.00	-0.97 +- 3.32
+       (paper) A2C	No	      2.61 +- 0.50	0.00 +- 0.00	-0.97 +- 3.32
 
-(paper) BC	Yes	0.75 +- 0.39	4.23 +- 4.15	5.57 +- 6.00
+        (paper) BC	Yes	      0.75 +- 0.39	4.23 +- 4.15	5.57 +- 6.00
 
-(paper) PreDQN	Yes	4.16 +- 0.82	6.00 +- 4.65	94.96 +- 13.42
+     (paper) PreDQN	Yes	      4.16 +- 0.82	6.00 +- 4.65	94.96 +- 13.42
 
-(ours) DDDQN	No	5.28 +- 2.87	4.0 +- 19.60	59.13 +- 52.43
+      (ours) DDDQN	No	      5.28 +- 2.87	4.0 +- 19.60	59.13 +- 52.43
 
-(ours) Rainbow	No	62.44 +- 2.74	13.0 +- 33.63	66.89 +- 41.24
+     (ours) Rainbow	No	     62.44 +- 2.74	13.0 +- 33.63	66.89 +- 41.24
 
-(ours) PPO	No	56.31 +- 8.31	8.0 +- 27.13	87.83 +- 59.46
+        (ours) PPO	No	     56.31 +- 8.31	8.0 +- 27.13	87.83 +- 59.46
 
-(ours) BC	Yes	9.27 +- 5.21	46.00 +- 50.1	69.54 +- 57.02
+         (ours) BC	Yes	      9.27 +- 5.21	46.00 +- 50.1	69.54 +- 57.02
 
-(ours) GAIL	Yes	16.34 +- 6.85	32.00 +- 46.88	59.32 +- 30.60
+       (ours) GAIL	Yes	     16.34 +- 6.85	32.00 +- 46.88	59.32 +- 30.60
 
-(ours) DQfD	Yes	62.37 +- 2.16	6.00 +- 23.75	not evaluated
+       (ours) DQfD	Yes	     62.37 +- 2.16	6.00 +- 23.75	not evaluated
 
-(paper) Human	-	64.00 +- 0.00	100.00 +- 0.00	164.00 +- 0.00
+     (paper) Human	-	     64.00 +- 0.00	100.00 +- 0.00	164.00 +- 0.00
 
 在实现过程中，利用了https://hub.docker.com/r/chenqibin422/minerl docker环境。由于硬件条件等各方面的约束，并没有得到好的训练效果，但能观察到reward不断提高，动作的奖励值是由开发者决定的，奖励值的设置好坏对学习效果有很大影响。
 
